@@ -10,10 +10,10 @@ from torch.utils.tensorboard import SummaryWriter
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from core.raft_stereo import RAFTStereo
+from raftstereo.raft_stereo import RAFTStereo
 
 from evaluate_stereo import *
-import core.stereo_datasets as datasets
+import raftstereo.stereo_datasets as datasets
 
 try:
     from torch.cuda.amp import GradScaler
