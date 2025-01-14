@@ -37,6 +37,7 @@ class RAFTStereo(nn.Module):
                 nn.Conv2d(128, 256, 3, padding=1))
         else:
             self.fnet = BasicEncoder(output_dim=256, norm_fn='instance', downsample=args.n_downsample)
+        self.iters = args.valid_iters
 
     def freeze_bn(self):
         for m in self.modules():
@@ -123,7 +124,7 @@ class RAFTStereo(nn.Module):
             coords1 = coords1 + delta_flow
 
             # We do not need to upsample or output intermediate results in test_mode
-            if test_mode and itr < iters-1:
+            if test_mode and itr < self.iters-1:
                 continue
 
             # upsample predictions
